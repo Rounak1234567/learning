@@ -39,7 +39,7 @@ function App() {
     'React'
   );
 
-
+  
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -64,7 +64,21 @@ function App() {
     },
   ];
 
-  const [stories, setStories] = useState(initialStories);
+  const getAsyncStories = () =>
+  new Promise(resolve =>
+    setTimeout(
+      () => resolve({ data: { stories: initialStories } }),
+      2000
+    )
+  );
+
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    getAsyncStories().then(result => {
+      setStories(result.data.stories);
+    });
+  }, []);
 
   const searchedStories = stories.filter(story =>
     story.title.toLowerCase().includes(search.toLowerCase())
