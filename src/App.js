@@ -14,19 +14,19 @@ function App() {
   // function showTest(text) {
   //   return text
   // }
-  
-  
+
+
 
   // Custom Hook
   const useSemiPersistentState = (key, initialState) => {
     const [value, setValue] = useState(
       localStorage.getItem(key) || initialState
     );
-  
+
     useEffect(() => {
       localStorage.setItem(key, value);
     }, [value, key]);
-  
+
     return [value, setValue];
   };
 
@@ -39,7 +39,7 @@ function App() {
     'React'
   );
 
-  
+
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -75,7 +75,15 @@ function App() {
       {/* <h1>{welcome.greeting} {welcome.title}</h1>
       <h1>welcome {showTest(<p>Rounak</p>)}</h1> */}
 
-      <Search term={search} handleSearch={handleSearch} />
+
+
+      <Search
+        id="search"
+        value={search}
+        onInputChange={handleSearch}
+      >
+        <strong>Search:</strong>
+      </Search>
       <hr />
       <List list={searchedStories} />
     </div>

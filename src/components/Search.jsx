@@ -1,10 +1,23 @@
-const Search = ({ term, handleSearch }) => {
-    
+const Search = ({
+    id,
+    value,
+    type = 'text',
+    onInputChange,
+    children
+}) => {
+
     return (
         <div>
-            <label htmlFor="search">Search: </label>
-            <input id="search" type="text" onChange={handleSearch} value={term}/>
-            <p>Searching for <strong>{term}</strong></p>
+            <>
+                <label htmlFor={id}>{children}</label>
+                &nbsp;
+                <input
+                    id={id}
+                    type={type}
+                    value={value}
+                    onChange={onInputChange}
+                />
+            </>
         </div>
     )
 }
