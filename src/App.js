@@ -15,7 +15,7 @@ function App() {
   //   return text
   // }
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("React");
 
   const handleSearch = (e) => {
     setSearch(e.target.value)
