@@ -15,12 +15,31 @@ function App() {
   //   return text
   // }
   
-  const [search, setSearch] = useState(localStorage.getItem('search') || 'React');
+  
 
-  useEffect(() => {
-    localStorage.setItem('search', search);
-  }, [search])
+  // Custom Hook
+  const useSemiPersistentState = (key, initialState) => {
+    const [value, setValue] = useState(
+      localStorage.getItem(key) || initialState
+    );
+  
+    useEffect(() => {
+      localStorage.setItem(key, value);
+    }, [value, key]);
+  
+    return [value, setValue];
+  };
 
+
+
+
+
+  const [search, setSearch] = useSemiPersistentState(
+    'search',
+    'React'
+  );
+
+  
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
