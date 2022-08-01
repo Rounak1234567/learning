@@ -80,6 +80,7 @@ function App() {
       <Search
         id="search"
         value={search}
+        isFocused
         onInputChange={handleSearch}
       >
         <strong>Search:</strong>
