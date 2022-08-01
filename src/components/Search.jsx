@@ -1,5 +1,5 @@
-const Search = (props) => {
-    const { term, handleSearch } = props;
+const Search = ({ term, handleSearch }) => {
+    
     return (
         <div>
             <label htmlFor="search">Search: </label>

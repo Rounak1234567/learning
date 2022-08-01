@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { List } from './components/List';
 import { Search } from './components/Search';
@@ -14,11 +14,16 @@ function App() {
   // function showTest(text) {
   //   return text
   // }
+  
+  const [search, setSearch] = useState(localStorage.getItem('search') || 'React');
 
-  const [search, setSearch] = useState("React");
+  useEffect(() => {
+    localStorage.setItem('search', search);
+  }, [search])
+
 
   const handleSearch = (e) => {
-    setSearch(e.target.value)
+    setSearch(e.target.value);
   }
 
   const list = [
@@ -40,6 +45,11 @@ function App() {
     },
   ];
 
+  const searchedStories = list.filter(story =>
+    story.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+
 
   return (
     <div>
@@ -47,8 +57,8 @@ function App() {
       <h1>welcome {showTest(<p>Rounak</p>)}</h1> */}
 
       <Search term={search} handleSearch={handleSearch} />
-      <hr/>
-      <List list={list}/>
+      <hr />
+      <List list={searchedStories} />
     </div>
   );
 }
