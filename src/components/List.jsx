@@ -1,7 +1,7 @@
-const List = ({ list }) => {
+const List = ({ list, onRemoveItem }) => {
 
 
-    const Item = ({ item }) => {
+    const Item = ({ item, onRemoveItem  }) => {
         return (
             <div>
                 <span>
@@ -10,12 +10,17 @@ const List = ({ list }) => {
                 <span>{item.author}</span>
                 <span>{item.num_comments}</span>
                 <span>{item.points}</span>
+                <span>
+                    <button type="button" onClick={() => onRemoveItem(item)}>
+                        Dismiss
+                    </button>
+                </span>
             </div>
         )
     }
 
 
-    return list.map(item => <Item key={item.objectID} item={item} />);
+    return list.map(item => <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />);
 }
 
 export { List }

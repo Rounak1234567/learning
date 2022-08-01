@@ -45,7 +45,7 @@ function App() {
     setSearch(e.target.value);
   }
 
-  const list = [
+  const initialStories = [
     {
       title: 'React',
       url: 'https://reactjs.org/',
@@ -64,9 +64,18 @@ function App() {
     },
   ];
 
-  const searchedStories = list.filter(story =>
+  const [stories, setStories] = useState(initialStories);
+
+  const searchedStories = stories.filter(story =>
     story.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleRemoveStory = (item)=>{
+    const newStories = stories.filter(story=>
+      item.objectID !== story.objectID 
+      );
+      setStories(newStories)
+  }
 
 
 
@@ -86,7 +95,7 @@ function App() {
         <strong>Search:</strong>
       </Search>
       <hr />
-      <List list={searchedStories} />
+      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
     </div>
   );
 }
